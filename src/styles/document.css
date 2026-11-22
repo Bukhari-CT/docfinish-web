@@ -1,0 +1,353 @@
+/*
+ * Document renderer styles.
+ * Applied identically to (1) the hidden measuring container and (2) each page body,
+ * so pagination measurements match what is rendered and printed.
+ * Template-specific variables arrive as inline CSS custom properties.
+ */
+
+.df-doc {
+  --df-block-gap: 0.75em;
+  font-family: var(--df-font-body);
+  font-size: var(--df-base-size, 11pt);
+  line-height: var(--df-line-height, 1.55);
+  color: var(--df-text, #14161a);
+  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+.df-doc > :first-child {
+  margin-top: 0 !important;
+}
+
+.df-doc p,
+.df-doc ul,
+.df-doc ol,
+.df-doc table,
+.df-doc pre,
+.df-doc blockquote,
+.df-doc .katex-display,
+.df-doc .df-mermaid,
+.df-doc hr {
+  margin: 0 0 var(--df-block-gap);
+}
+
+.df-doc h1,
+.df-doc h2,
+.df-doc h3,
+.df-doc h4,
+.df-doc h5,
+.df-doc h6 {
+  font-family: var(--df-font-heading);
+  font-weight: var(--df-heading-weight, 600);
+  color: var(--df-heading-color, var(--df-text));
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  margin: 1.25em 0 0.45em;
+}
+.df-doc h1 {
+  font-size: var(--df-h1-size, 26pt);
+  margin-top: 0;
+  margin-bottom: 0.35em;
+  letter-spacing: -0.015em;
+}
+.df-doc h2 {
+  font-size: var(--df-h2-size, 16pt);
+  border-bottom: var(--df-h2-border, none);
+  padding-bottom: 0.2em;
+}
+.df-doc h3 {
+  font-size: var(--df-h3-size, 12.5pt);
+}
+.df-doc h4 {
+  font-size: 1.05em;
+}
+.df-doc h5,
+.df-doc h6 {
+  font-size: 1em;
+}
+
+.df-doc a {
+  color: var(--df-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.15em;
+}
+.df-doc strong {
+  font-weight: 650;
+}
+
+.df-doc ul,
+.df-doc ol {
+  padding-left: 1.35em;
+}
+.df-doc ul {
+  list-style: disc;
+}
+.df-doc ol {
+  list-style: decimal;
+}
+.df-doc li {
+  margin: 0.18em 0;
+}
+.df-doc li::marker {
+  color: var(--df-accent);
+}
+.df-doc li > ul,
+.df-doc li > ol {
+  margin: 0.15em 0 0.2em;
+}
+.df-doc li > p {
+  margin: 0 0 0.3em;
+}
+.df-doc ul.contains-task-list {
+  list-style: none;
+  padding-left: 0.2em;
+}
+.df-doc li.task-list-item {
+  list-style: none;
+}
+.df-doc li.task-list-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.85em;
+  height: 0.85em;
+  margin: 0 0.5em 0 0;
+  vertical-align: -0.08em;
+  border: 1.4px solid color-mix(in srgb, var(--df-text) 55%, transparent);
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+}
+.df-doc li.task-list-item input[type="checkbox"]:checked {
+  background: var(--df-accent);
+  border-color: var(--df-accent);
+}
+.df-doc li.task-list-item input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.24em;
+  top: 0.06em;
+  width: 0.22em;
+  height: 0.45em;
+  border: solid #fff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+.df-doc blockquote {
+  border-left: 3px solid var(--df-quote-border, var(--df-accent));
+  background: var(--df-quote-bg, #f4f2ec);
+  padding: 0.55em 1em;
+  color: color-mix(in srgb, var(--df-text) 88%, transparent);
+}
+.df-doc blockquote > :last-child {
+  margin-bottom: 0;
+}
+.df-doc blockquote p {
+  margin: 0 0 0.4em;
+}
+
+.df-doc code {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 0.86em;
+}
+.df-doc :not(pre) > code {
+  background: var(--df-code-bg, #f2f0eb);
+  padding: 0.08em 0.32em;
+  border-radius: 3px;
+}
+.df-doc pre {
+  background: var(--df-code-bg, #f6f5f1);
+  border: 1px solid #e7e3da;
+  border-radius: 4px;
+  padding: 0.7em 0.9em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+}
+.df-doc pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.82em;
+}
+.df-doc pre code.hljs {
+  background: none;
+  padding: 0;
+}
+
+.df-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  line-height: 1.4;
+}
+.df-doc th {
+  background: var(--df-table-head-bg, #f1efe9);
+  color: var(--df-table-head-color, var(--df-text));
+  font-weight: 600;
+  text-align: left;
+  padding: 0.45em 0.65em;
+  border-bottom: 1px solid var(--df-table-border, #ddd8cd);
+}
+.df-doc td {
+  padding: 0.42em 0.65em;
+  border-bottom: 1px solid var(--df-table-border, #e8e4dc);
+  vertical-align: top;
+}
+.df-doc tbody tr:nth-child(even) td {
+  background: var(--df-table-stripe, transparent);
+}
+.df-doc th[align="right"],
+.df-doc td[align="right"] {
+  text-align: right;
+}
+.df-doc th[align="center"],
+.df-doc td[align="center"] {
+  text-align: center;
+}
+
+.df-doc img {
+  max-width: 100%;
+  height: auto;
+}
+.df-doc hr {
+  border: 0;
+  border-top: 1px solid #ddd8cd;
+  margin: 1.2em 0;
+}
+.df-doc .katex-display {
+  display: block;
+  overflow: hidden;
+  padding: 0.2em 0;
+  text-align: center;
+}
+.df-doc .katex {
+  font-size: 1.08em;
+}
+.df-doc .df-mermaid {
+  display: flex;
+  justify-content: center;
+}
+.df-doc .df-mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+.df-doc .df-mermaid--error {
+  flex-direction: column;
+  gap: 0.2em;
+  font-size: 0.85em;
+  color: #9a2a20;
+  background: #fdf0ee;
+  border: 1px solid #f1c8c2;
+  border-radius: 4px;
+  padding: 0.6em 0.8em;
+}
+.df-doc .df-title-logo {
+  margin-bottom: 1.2em;
+}
+.df-doc .df-title-logo img {
+  width: auto;
+  max-width: 60%;
+  object-fit: contain;
+}
+.df-doc .df-page-break {
+  height: 0;
+  margin: 0;
+}
+.df-doc .df-render-error {
+  color: #9a2a20;
+}
+
+/* ---------- Page boxes ---------- */
+
+.df-page {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  flex: none;
+  color: var(--df-text);
+}
+.df-page-band {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 4mm;
+  font-family: var(--df-font-body);
+  font-size: 7.5pt;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--df-text) 58%, transparent);
+  letter-spacing: 0.01em;
+}
+.df-page-band > :nth-child(1) {
+  text-align: left;
+  justify-self: start;
+}
+.df-page-band > :nth-child(2) {
+  text-align: center;
+}
+.df-page-band > :nth-child(3) {
+  text-align: right;
+  justify-self: end;
+}
+.df-page-band .df-band-slot {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.df-page-band img {
+  display: block;
+  width: auto;
+  object-fit: contain;
+}
+.df-page-band--header {
+  border-bottom: 0.5px solid color-mix(in srgb, var(--df-text) 12%, transparent);
+  padding-bottom: 1.5mm;
+}
+.df-page-band--footer {
+  border-top: 0.5px solid color-mix(in srgb, var(--df-text) 12%, transparent);
+  padding-top: 1.5mm;
+}
+.df-page-body {
+  position: absolute;
+  overflow: visible;
+}
+
+/* Cover page */
+.df-page--cover {
+  background: var(--df-cover-bg, #fff);
+  color: var(--df-cover-color, var(--df-text));
+}
+.df-page--cover .df-page-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--df-cover-color, var(--df-text));
+}
+.df-page--cover .df-page-body h1 {
+  font-size: calc(var(--df-h1-size, 26pt) * 1.25);
+  color: var(--df-cover-color, var(--df-text));
+  margin-bottom: 0.5em;
+}
+.df-page--cover .df-page-body h1::after {
+  content: "";
+  display: block;
+  width: 18mm;
+  height: 1.2mm;
+  margin-top: 6mm;
+  background: var(--df-accent);
+}
+.df-page--cover .df-page-body p,
+.df-page--cover .df-page-body li {
+  color: color-mix(in srgb, var(--df-cover-color, var(--df-text)) 80%, transparent);
+}
+.df-page--cover .df-page-band {
+  color: color-mix(in srgb, var(--df-cover-color, var(--df-text)) 60%, transparent);
+  border-color: color-mix(in srgb, var(--df-cover-color, var(--df-text)) 20%, transparent);
+}
+

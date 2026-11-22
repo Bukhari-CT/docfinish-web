@@ -1,0 +1,41 @@
+/*
+ * Print export. The workspace mounts a portal (.df-print-root) directly under <body>
+ * containing the already-paginated pages at exact physical size, injects an
+ * @page { size: ...; margin: 0 } rule, then calls window.print().
+ */
+
+.df-print-root {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  body > *:not(.df-print-root) {
+    display: none !important;
+  }
+  .df-print-root {
+    display: block !important;
+  }
+  .df-print-root .df-page {
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .df-print-root .df-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .df-print-root,
+  .df-print-root * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}

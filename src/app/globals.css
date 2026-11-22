@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@import "highlight.js/styles/github.css";
+@import "../styles/document.css";
+@import "../styles/templates.css";
+@import "../styles/print.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --canvas: #f7f4ee;
+  --paper: #fbf9f5;
+  --ink: #14161a;
+  --navy: #0f1b2d;
+  --navy-2: #1a2a42;
+  --cobalt: #2448e0;
+  --cobalt-soft: #e8edfd;
+
+  --background: #fbf9f5;
+  --foreground: #14161a;
+  --card: #ffffff;
+  --card-foreground: #14161a;
+  --popover: #ffffff;
+  --popover-foreground: #14161a;
+  --primary: #0f1b2d;
+  --primary-foreground: #fbf9f5;
+  --secondary: #efebe3;
+  --secondary-foreground: #14161a;
+  --muted: #f1ede6;
+  --muted-foreground: #5d6270;
+  --accent: #e8edfd;
+  --accent-foreground: #1b36ad;
+  --destructive: #c2362b;
+  --destructive-foreground: #ffffff;
+  --success: #1f7a4d;
+  --warning: #b45309;
+  --border: #e3ddd2;
+  --input: #dcd5c8;
+  --ring: #2448e0;
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-canvas: var(--canvas);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-soft: var(--cobalt-soft);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  @keyframes shimmer {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: #c9d4fb;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .prose-article {
+    @apply text-[17px] leading-[1.75] text-ink/90;
+  }
+  .prose-article h2 {
+    @apply font-display mt-12 mb-4 text-[1.75rem] leading-tight font-medium text-ink;
+  }
+  .prose-article h3 {
+    @apply mt-8 mb-3 text-xl font-semibold text-ink;
+  }
+  .prose-article p {
+    @apply my-5;
+  }
+  .prose-article a {
+    @apply text-cobalt underline decoration-cobalt/30 underline-offset-4 hover:decoration-cobalt;
+  }
+  .prose-article ul,
+  .prose-article ol {
+    @apply my-5 pl-6;
+  }
+  .prose-article ul {
+    @apply list-disc;
+  }
+  .prose-article ol {
+    @apply list-decimal;
+  }
+  .prose-article li {
+    @apply my-1.5;
+  }
+  .prose-article li.task-list-item {
+    @apply list-none -ml-6;
+  }
+  .prose-article li.task-list-item input {
+    @apply mr-2 align-middle accent-cobalt;
+  }
+  .prose-article blockquote {
+    @apply my-6 border-l-2 border-cobalt bg-cobalt-soft/50 px-5 py-3 text-ink/80;
+  }
+  .prose-article code:not(pre code) {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em];
+  }
+  .prose-article pre {
+    @apply my-6 overflow-x-auto rounded-lg border bg-white p-4 font-mono text-sm leading-relaxed;
+  }
+  .prose-article table {
+    @apply my-6 w-full border-collapse text-[15px];
+  }
+  .prose-article th {
+    @apply border-b-2 border-ink/15 px-3 py-2 text-left font-semibold;
+  }
+  .prose-article td {
+    @apply border-b border-border px-3 py-2 align-top;
+  }
+  .prose-article hr {
+    @apply my-10;
+  }
+}
